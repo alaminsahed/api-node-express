@@ -1,17 +1,1 @@
-{
-    "student":[{
-        "id": 1,
-        "name": "rahim",
-        "class": "7"
-    },
-    {
-        "id": 2,
-        "name": "karim",
-        "class": "8"
-    },
-    {
-        "id": 3,
-        "name": "jahim",
-        "class": "9"
-    }]
-}
+[{"id":1,"name":"rahim","class":"7"},{"id":2,"name":"karim","class":"8"},{"id":3,"name":"jahim","class":"9"},{"id":12,"name":"lahim","class":"7"},{"id":14,"name":"lahim","class":"7"},{"id":21,"name":"lahim","class":"7"},{"id":11,"name":"bahim","class":"7"},{"id":11,"name":"bahim","class":"7"}]
