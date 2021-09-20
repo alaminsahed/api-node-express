@@ -18,21 +18,7 @@ app.get("/api/student",(req,res)=>{
   
 })
 
-app.post('/api/student',(req, res)=>{
-    const student = req.body;
-    data.getStudent()
-    .then(students=>{
-        
-        students.push(student)
-        // all students rewrite here.
-        data.insertStudent(students)
-        .then(newStudent =>{
-            //newStudent is the response of resolve
-            res.send(students)
-        })
-    })
-   
-})
+app.post('/api/student')
 
 
 app.put('/api/student/:id',(req,res)=>{
