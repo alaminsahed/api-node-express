@@ -3,7 +3,7 @@ const fs = require('fs');
 const getStudent = ()=>{
     return new Promise((resolve, reject)=>{
         fs.readFile('./db.json', 'utf-8',(err, data)=>{
-            // console.log(data);
+            //  console.log(data);
             //JSON.parse convert the string data to js obj 
             const student = JSON.parse(data);
             resolve(student);
