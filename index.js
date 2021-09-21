@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const data = require('./data');
+const studentRouters = require('./routers/studentRouter.js');
 
 app.use(express.json())
 
@@ -8,12 +8,9 @@ app.get("/", (req,res)=>{
     res.send('hello world')
 })
 
-app.get("/api/student")
-
-app.post('/api/student')
+app.use("/api/student", studentRouters)
 
 
-app.put('/api/student/:id')
 
 
 const port = 3000;

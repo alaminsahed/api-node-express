@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const data = require('./data');
+const data = require('../db.json');
 
 
 const studentList =(req,res)=>{
@@ -58,11 +58,25 @@ const editStudent = (req,res)=>{
 
 }
 
-const deleteStudent = ()
+const deleteStudent = (req, res) =>{
+    const id = parseInt(req.params.id);
+    data.getStudent()
+    .then(students=>{
+        const student = students.find(s=>s.id === id);
+        if(!student) res.status(404).send("not found by this is")
+        else{
+            const allStudents = students.filter(s => s.id !== id);
+            data.insertStudent(allStudents)
+            .then(msg=>res.send(students));
+        }
+    })
+}
 
 
 router.route('/').get(studentList).post(addStudent);
-router.route('/:id').put(editStudent)
+router.route('/:id').get(editStudent).put(editStudent).delete(deleteStudent);
+
+module.exports = router;
 
 
 
