@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const data = require('../db.json');
+const data = require('../data');
 
 
 const studentList =(req,res)=>{
