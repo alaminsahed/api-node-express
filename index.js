@@ -8,6 +8,7 @@ const morgan = require('morgan');
 // middleware maintain sequence
 app.use(express.json()) // Put/post/patch -> json object saves in req.body
 
+//postman -> body -> x-www-form-urlencoded
 app.use(express.urlencoded({extended:true})); //When send not json data //data-> id=1&&name = something.
 
 app.use(express.static('public')); //access file http://localhost:3000/demo.txt
