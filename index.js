@@ -4,6 +4,7 @@ const studentRouters = require('./routers/studentRouter.js');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const userRouter = require('./routers/userRouter');
+const authRouter = require('./routers/outhRouter');
 
 //builtin middleware
 // middleware is object. 3 parts -> req ,res, next
@@ -31,6 +32,8 @@ app.get("/", (req,res)=>{
 app.use("/api/student", studentRouters);
 
 app.use("/api/user",userRouter);
+
+app.use("/api/auth",authRouter);
 
 
 const port = 3000;
