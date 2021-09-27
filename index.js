@@ -3,6 +3,7 @@ const app = express();
 const studentRouters = require('./routers/studentRouter.js');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const userRouter = require('./routers/userRouter');
 
 //builtin middleware
 // middleware is object. 3 parts -> req ,res, next
@@ -27,9 +28,9 @@ app.get("/", (req,res)=>{
     res.send('hello world')
 })
 
-app.use("/api/student", studentRouters)
+app.use("/api/student", studentRouters);
 
-
+app.use("/api/user",userRouter);
 
 
 const port = 3000;
