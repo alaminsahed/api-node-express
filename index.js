@@ -1,29 +1,29 @@
 const express = require("express");
+const dotenv = require('dotenv');
 const app = express();
 const studentRouters = require('./routers/studentRouter.js');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
 const userRouter = require('./routers/userRouter');
 const authRouter = require('./routers/outhRouter');
+const connection = require('./conn');
 
-//builtin middleware
-// middleware is object. 3 parts -> req ,res, next
-// middleware maintain sequence
+dotenv.config({path:'./config.env'});
+
+//call database file
+connection();
+
+
 app.use(express.json()) // Put/post/patch -> json object saves in req.body
 
-mongoose.connect('mongodb://localhost:27017/college',{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(()=>console.log("database connected"))
-.catch((err)=>console.log(err))
 
 
 
-//third party middleware
-// morgan -> console the api
+if(process.env.NODE_ENV === 'development')
+{
+    app.use(morgan('dev'));
+}
 
-app.use(morgan('dev'));
+
 
 app.get("/", (req,res)=>{
     res.send('hello world')
@@ -36,8 +36,9 @@ app.use("/api/user",userRouter);
 app.use("/api/auth",authRouter);
 
 
-const port = 3000;
+// port
+const port = process.env.PORT || 5000
 
-app.listen(port, ()=>{
+app.listen( port , ()=>{
    console.log(`listing port no ${port}`) 
 });

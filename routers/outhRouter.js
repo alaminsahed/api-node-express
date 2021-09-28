@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 
 const getUser= async(req,res)=>{
     const user = await User.findOne({email:req.body.email});
+    // console.log(user.genJWT());
     if(!user) res.status(404).send("Please Register");
 
     //compare sequence should be as it is
@@ -14,6 +15,7 @@ const getUser= async(req,res)=>{
         res.send("password not matched")
     }
     else{
+        
         res.send("Password match")
     }
     
