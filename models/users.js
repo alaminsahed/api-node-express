@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
 const usersSchema = new mongoose.Schema({
-  name: { type: String, required: true, minlength: 5, maxlength: 10 },
+  name: { type: String, required: true, maxlength: 10 },
   email: {
     type: String,
     required: true,
@@ -13,6 +13,12 @@ const usersSchema = new mongoose.Schema({
     ],
   },
   password: { type: String, required: true, minlength: 5 },
+  role:{
+    type: String,
+    enum: ["client","admin"],
+    default: "client"
+  }
+  //role base auth routing
 });
 
 // we can create schema method
@@ -22,7 +28,7 @@ const usersSchema = new mongoose.Schema({
 // this point current function in arrow function
 
 usersSchema.methods.genJWT = function () {
-  const token = jwt.sign({ _id: this._id, email: this.email }, process.env.key);
+  const token = jwt.sign({ _id: this._id, email: this.email, role: this.role }, process.env.key);
   return token;
 };
 

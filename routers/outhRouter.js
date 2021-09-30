@@ -15,8 +15,8 @@ const getUser= async(req,res)=>{
         res.send("password not matched")
     }
     else{
-        
-        res.send("Password match")
+        const token = user.genJWT();
+        res.send({token:token})
     }
     
 }

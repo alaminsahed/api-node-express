@@ -12,7 +12,8 @@ const addUser= async(req,res)=>{
     const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        role: req.body.role
     });
 
   
@@ -20,11 +21,15 @@ const addUser= async(req,res)=>{
     const getSlat = await bcrypt.genSalt(10); 
     newUser.password = await bcrypt.hash(newUser.password,getSlat);
 
+    const token = newUser.genJWT();
+
    try {
        const saveNewUser = await newUser.save();
        res.send({
            name: saveNewUser.name,
-           email: saveNewUser.email
+           email: saveNewUser.email,
+           role: saveNewUser.role,
+           token: token
        });
        
    } catch (error) {

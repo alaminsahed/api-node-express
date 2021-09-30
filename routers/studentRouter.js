@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const {Student} = require('../models/Students');
+const authorized = require('../middlewires/authorized');
+const checkAdmin = require("../middlewires/checkAdmin");
 
 
 const studentList = async(req,res)=>{
@@ -89,9 +91,10 @@ const deleteStudent = async (req, res) =>{
    
 }
 
+//authorized private route->token generated login time-> match-> data access   
 
-router.route('/').get(studentList).post(addStudent);
-router.route('/:id').get(studentInformation).put(editStudent).delete(deleteStudent);
+router.route('/').get(authorized,studentList).post(addStudent);
+router.route('/:id').get([authorized,checkAdmin],studentInformation).put(editStudent).delete([authorized,checkAdmin],deleteStudent);
 
 module.exports = router;
 
